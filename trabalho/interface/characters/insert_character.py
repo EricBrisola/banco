@@ -1,4 +1,4 @@
-from interface.connection.database_connection import get_connection
+from connection.database_connection import get_connection
 
 
 def insert_new_character() -> None:
@@ -14,6 +14,7 @@ def insert_new_character() -> None:
     if conexao:
         cursor = conexao.cursor()
         if hasGuild == "S":
+            # Inserir a função de buscar guilda para inserir o personagem nela
             guildId = input("Id da guilda: ")
             queryWithGuild = 'INSERT INTO Personagem (idGuilda, nome, hp, forca, stamina, classe) VALUES (%s, %s, %s, %s, %s, %s)'
             characterWithGuild = (guildId, nome, hp, forca, stamina, classe)
@@ -30,6 +31,3 @@ def insert_new_character() -> None:
 
         cursor.close()
         conexao.close()
-
-
-insert_new_character()
