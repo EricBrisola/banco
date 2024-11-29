@@ -1,4 +1,4 @@
--- CREATE DATABASE JogoRpg;
+CREATE DATABASE JogoRpg;
 
 USE JogoRpg;
 
