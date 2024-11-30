@@ -7,7 +7,7 @@ def get_all_characters():
 
     if conexao:
         cursor = conexao.cursor()
-        query = 'SELECT p.id AS Código , p.nome AS Nome, g.nome AS Guilda, p.classe AS Classe, p.hp AS Vida, p.forca AS Força, p.stamina AS Energia FROM Personagem p LEFT JOIN Guilda g ON p.idGuilda = g.id'
+        query = 'SELECT p.id AS Código , p.nome AS Nome, g.nome AS Guilda, p.classe AS Classe, p.hp AS Vida, p.forca AS Força, p.stamina AS Stamina FROM Personagem p LEFT JOIN Guilda g ON p.idGuilda = g.id'
         cursor.execute(query)
         characters = cursor.fetchall()
 

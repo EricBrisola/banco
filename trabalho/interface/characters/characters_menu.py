@@ -2,6 +2,7 @@ from .get_all_characters import get_all_characters
 from .get_one_character import get_one_character
 from .insert_character import insert_new_character
 from .delete_character import delete_character
+from .update_character import update_character
 from tabulate import tabulate
 
 
@@ -23,6 +24,7 @@ def characters_menu():
                 delete_character()
             elif charChoice == 4:
                 print("\nAtualizar\n")
+                update_character()
             elif charChoice == 3:
                 print("\nInserir novo\n")
                 insert_new_character()
