@@ -1,8 +1,8 @@
-from interface.connection.database_connection import get_connection
+from connection.database_connection import get_connection
 from tabulate import tabulate
 
 
-def get_all_characters() -> None:
+def get_all_characters():
     conexao = get_connection()
 
     if conexao:
@@ -18,7 +18,3 @@ def get_all_characters() -> None:
 
         cursor.close()
         conexao.close()
-        # trocar para retornar a string tabulate ao inves de printala aqui
-
-
-get_all_characters()
