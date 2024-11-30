@@ -16,12 +16,12 @@ def delete_character():
 
     if choice == "S" or choice == "s":
         conexao = get_connection()
-        chaId = charTable[0][0][0]
+        charId = charTable[0][0][0]
 
         if conexao:
             cursor = conexao.cursor()
             query = "DELETE FROM Personagem WHERE id = %s;"
-            cursor.execute(query, (chaId,))
+            cursor.execute(query, (charId,))
             conexao.commit()
 
             print(f'{cursor.rowcount} registro(s) removido(s).')

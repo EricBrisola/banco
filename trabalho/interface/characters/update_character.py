@@ -13,23 +13,69 @@ def update_character():
         return
 
     choice = input("\nDeseja Atualizar esse personagem ? (S/N): ")
+    charId = charTable[0][0][0]
 
-    if choice == "S" or choice == "s":
-        conexao = get_connection()
-        chaId = charTable[0][0][0]
+    if choice.lower() == "s":
+        query = ""
+        while True:
+            conexao = get_connection()
+            charAttribute = int(input(
+                "\nQual atributo deseja alterar ?\n1- Nome\n2- HP\n3- Força\n4- Stamina\n5- Classe\n6- Guilda\n7- Sair\nEscolha: "))
 
-        if conexao:
-            cursor = conexao.cursor()
-            query = "DELETE FROM Personagem WHERE id = %s;"
-            # trocar para update
-            cursor.execute(query, (chaId,))
-            conexao.commit()
+            if charAttribute >= 7 or charAttribute < 1:
+                print("\nSaindo da atualização de personagem...")
+                break
+            elif charAttribute == 6:
+                guildName = input("\nNome da guilda que quer entrar: ")
+                # necessita consulta gabriel
+            elif charAttribute == 5:
+                newClass = input(
+                    "\nNova classe\nApenas Ladrão, Mago, Guerreiro ou Necromante: ")
+                query = "UPDATE Personagem SET classe = %s WHERE id = %s;"
 
-            print(f'{cursor.rowcount} registro(s) removido(s).')
+                cursor = conexao.cursor()
+                cursor.execute(query, (newClass, charId))
+                conexao.commit()
 
-            cursor.close()
-            conexao.close()
-    elif choice == "N" or choice == "n":
+                print(f'{cursor.rowcount} registro(s) removido(s).')
+            elif charAttribute == 4:
+                newStamina = int(input("\nNova quantidade de stamina: "))
+                query = "UPDATE Personagem SET stamina = %s WHERE id = %s;"
+
+                cursor = conexao.cursor()
+                cursor.execute(query, (newStamina, charId))
+                conexao.commit()
+            elif charAttribute == 3:
+                newstrength = int(input("\nNova quantidade de força: "))
+                query = "UPDATE Personagem SET forca = %s WHERE id = %s;"
+
+                cursor = conexao.cursor()
+                cursor.execute(query, (newstrength, charId))
+                conexao.commit()
+            elif charAttribute == 2:
+                newHp = int(input("\nNova quantidade de HP: "))
+                query = "UPDATE Personagem SET hp = %s WHERE id = %s;"
+
+                cursor = conexao.cursor()
+                cursor.execute(query, (newHp, charId))
+                conexao.commit()
+            elif charAttribute == 1:
+                name = input("\nNovo nome do personagem: ")
+                query = "UPDATE Personagem SET nome = %s WHERE id = %s;"
+
+                cursor = conexao.cursor()
+                cursor.execute(query, (name, charId))
+                conexao.commit()
+            else:
+                print("\nEscolha nao encontrada! Retornando...")
+                break
+
+            if conexao:
+                print(f'{cursor.rowcount} registro(s) alterado(s).')
+                cursor.close()
+                conexao.close()
+
+    elif choice.lower() == "n":
         print("\nOperação cancelada! Retornando...")
         return
     else:

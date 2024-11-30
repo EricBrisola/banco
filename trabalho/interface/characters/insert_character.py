@@ -13,7 +13,7 @@ def insert_new_character() -> None:
 
     if conexao:
         cursor = conexao.cursor()
-        if hasGuild == "S":
+        if hasGuild.lower() == "s":
             # Inserir a função de buscar guilda para inserir o personagem nela
             guildId = input("Id da guilda: ")
             queryWithGuild = 'INSERT INTO Personagem (idGuilda, nome, hp, forca, stamina, classe) VALUES (%s, %s, %s, %s, %s, %s)'
@@ -27,7 +27,6 @@ def insert_new_character() -> None:
         conexao.commit()
 
         print(f'{cursor.rowcount} registro(s) inserido(s).')
-        # chamar a funçao de listar 1 personagem para mostrar ele no banco
 
         cursor.close()
         conexao.close()

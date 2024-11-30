@@ -8,14 +8,14 @@ def get_one_character():
     query = ""
     charId, charName, parameter = 0, "", ""
 
-    if choice == "id" or choice == "Id":
+    if choice.lower() == "id":
         charId = int(input("\nDigite o id: "))
-        query = 'SELECT p.id AS Código , p.nome AS Nome, g.nome AS Guilda, p.classe AS Classe, p.hp AS Vida, p.forca AS Força, p.stamina AS Energia FROM Personagem p LEFT JOIN Guilda g ON p.idGuilda = g.id WHERE p.id = %s'
+        query = 'SELECT p.id AS Código , p.nome AS Nome, g.nome AS Guilda, p.classe AS Classe, p.hp AS Vida, p.forca AS Força, p.stamina AS Stamina FROM Personagem p LEFT JOIN Guilda g ON p.idGuilda = g.id WHERE p.id = %s'
         parameter = charId
     elif choice == "nome" or choice == "Nome":
         charName = input("Digite o nome: ")
         parameter = charName
-        query = 'SELECT p.id AS Código , p.nome AS Nome, g.nome AS Guilda, p.classe AS Classe, p.hp AS Vida, p.forca AS Força, p.stamina AS Energia FROM Personagem p LEFT JOIN Guilda g ON p.idGuilda = g.id WHERE p.nome = %s'
+        query = 'SELECT p.id AS Código , p.nome AS Nome, g.nome AS Guilda, p.classe AS Classe, p.hp AS Vida, p.forca AS Força, p.stamina AS Stamina FROM Personagem p LEFT JOIN Guilda g ON p.idGuilda = g.id WHERE p.nome = %s'
     else:
         print("\nEscolha nao encontrada! Retornando...")
         return []
