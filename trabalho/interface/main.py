@@ -5,7 +5,7 @@ while True:
     print("----------------------------------")
     print("SISTEMA GERENCIADOR DO JOGO DE RPG")
     print("----------------------------------")
-    print("Digite qual tabela deseja entrar\n")
+    print("Digite qual tabela deseja entrar/acessar\n")
 
     try:
         choice = int(

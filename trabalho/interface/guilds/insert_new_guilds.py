@@ -5,14 +5,15 @@ from characters.get_one_character import get_one_character
 def insert_new_guilds() -> None:
     conexao = get_connection()
 
-    nome = input('Qual o nome da Guilda: ')
+    nome = input('Qual o nome da nova Guilda: ')
     print("\nPara criar uma guilda, precisamos de um líder")
     personagem = get_one_character()
+    if len(personagem) < 1:
+        return
 
     persId = personagem[0][0][0]
     guilda = personagem[0][0][2]
 
-    print(personagem)
     
     if guilda == None:
         if conexao:
@@ -24,6 +25,22 @@ def insert_new_guilds() -> None:
             cursor.execute(query, guildaDados)
             conexao.commit()
             print(f'{cursor.rowcount} registro(s) inserido(s).')
+
+            query =  "select id from guilda where idLider = %s;"
+            cursor = conexao.cursor()
+            cursor.execute(query, (persId,))
+            idGuilda = cursor.fetchall()
+            if idGuilda:
+                idGuilda = idGuilda[0][0]  # Primeiro elemento da primeira tupla
+            else:
+                print("Erro: ID da guilda não encontrado.")
+                return
+            
+            query = "UPDATE Personagem SET idGuilda = %s WHERE id = %s;"
+            cursor = conexao.cursor()
+            personagemDados = (idGuilda, persId)
+            cursor.execute(query, personagemDados)
+            conexao.commit()
         # chamar a funçao de listar 1 personagem para mostrar ele no banco
 
         cursor.close()

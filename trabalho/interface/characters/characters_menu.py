@@ -32,7 +32,6 @@ def characters_menu():
                 print("\nListar apenas um\n")
 
                 charTable = get_one_character()
-                print(charTable)
                 if len(charTable) > 0:
                     character, headers = charTable[0], charTable[1]
                     print(tabulate(character, headers=headers, tablefmt="fancy_grid"))

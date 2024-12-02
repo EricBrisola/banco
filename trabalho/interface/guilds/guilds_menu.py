@@ -1,7 +1,8 @@
 from .insert_new_guilds import insert_new_guilds
 from .get_all_guilds import get_all_guilds
-#from delete_guilds import
-#from get_one_builds import
+from .delete_guilds import delete_guilds
+from .get_one_guilds import get_one_guilds
+from .update_guilds import update_guild
 
 from tabulate import tabulate
 
@@ -20,23 +21,23 @@ def guilds_menu():
                 print("\nSaindo...")
                 break
             elif charChoice == 5:
-                print("\nRemover\n")
+                print("\nRemover guilda\n")
                 delete_guilds()
             elif charChoice == 4:
-                print("\nAtualizar\n")
+                print("\nAtualizar guilda\n")
+                update_guild()
             elif charChoice == 3:
-                print("\nInserir novo\n")
+                print("\nInserir nova guilda\n")
                 insert_new_guilds()
             elif charChoice == 2:
-                print("\nListar apenas um\n")
+                print("\nListar apenas uma\n")
 
-                charTable = get_one_builds()
-                print(charTable)
+                charTable = get_one_guilds()
                 if len(charTable) > 0:
                     character, headers = charTable[0], charTable[1]
                     print(tabulate(character, headers=headers, tablefmt="fancy_grid"))
             elif charChoice == 1:
-                print("\nListar todos\n")
+                print("\nListar todas\n")
                 get_all_guilds()
 
         except ValueError:
