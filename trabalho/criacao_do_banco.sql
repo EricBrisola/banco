@@ -42,10 +42,10 @@ CREATE TABLE IF NOT EXISTS Personagem (
     forca INT NOT NULL CHECK (forca >= 10),
     stamina INT NOT NULL CHECK (stamina >= 10),
     classe ENUM('Ladrão', 'Mago', 'Guerreiro', 'Necromante') NOT NULL,
-	CONSTRAINT fk_guilda FOREIGN KEY (idGuilda) REFERENCES Guilda (id)
+	CONSTRAINT fk_guilda FOREIGN KEY (idGuilda) REFERENCES Guilda (id) ON DELETE CASCADE
 );
 
-ALTER TABLE Guilda ADD CONSTRAINT fk_lider FOREIGN KEY (idLider) REFERENCES Personagem (id);
+ALTER TABLE Guilda ADD CONSTRAINT fk_lider FOREIGN KEY (idLider) REFERENCES Personagem (id) ON DELETE CASCADE;
 
 CREATE TABLE IF NOT EXISTS Item (
 	id INT AUTO_INCREMENT PRIMARY KEY, 

@@ -1,6 +1,7 @@
 from connection.database_connection import get_connection
 from .get_one_character import get_one_character
 from tabulate import tabulate
+from guilds.get_one_guilds import get_one_guilds
 
 
 def update_character():
@@ -26,8 +27,19 @@ def update_character():
                 print("\nSaindo da atualização de personagem...")
                 break
             elif charAttribute == 6:
-                guildName = input("\nNome da guilda que quer entrar: ")
-                # necessita consulta gabriel
+                guildTable = get_one_guilds()
+                if len(guildTable) > 0:
+
+                    newGuild = guildTable[0][0][0]
+                    query = "UPDATE Personagem SET idGuilda = %s WHERE id = %s"
+
+                    cursor = conexao.cursor()
+                    cursor.execute(query, (newGuild, charId))
+                    conexao.commit()
+
+                else:
+                    return
+
             elif charAttribute == 5:
                 newClass = input(
                     "\nNova classe\nApenas Ladrão, Mago, Guerreiro ou Necromante: ")
@@ -37,7 +49,6 @@ def update_character():
                 cursor.execute(query, (newClass, charId))
                 conexao.commit()
 
-                print(f'{cursor.rowcount} registro(s) removido(s).')
             elif charAttribute == 4:
                 newStamina = int(input("\nNova quantidade de stamina: "))
                 query = "UPDATE Personagem SET stamina = %s WHERE id = %s;"
